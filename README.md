@@ -7,6 +7,8 @@ Escribí `/firma` y se reemplaza solo. Seleccioná texto y buscalo en Maps al in
 > *"Newen" significa fuerza, energía y poder en mapudungun, la lengua del pueblo mapuche.*
 
 ---
+<img width="1093" height="797" alt="newen" src="https://github.com/user-attachments/assets/97202b64-4593-43c8-89cf-bdb65e7abf2e" />
+
 
 ## 📥 Descargar
 | Plataforma | Archivo |
@@ -14,7 +16,8 @@ Escribí `/firma` y se reemplaza solo. Seleccioná texto y buscalo en Maps al in
 | **Windows 10/11** | [NewenKey-Windows.exe](../../releases/latest) |
 | **macOS Apple Silicon (M1/M2/M3/M4)** | [NewenKey-Mac-AppleSilicon.dmg](../../releases/latest) |
 | **macOS Intel** | [NewenKey-Mac-Intel.dmg](../../releases/latest) |
----
+---<img width="1093" height="797" alt="newen" src="https://github.com/user-attachments/assets/731a164e-9cf7-4df0-8ceb-e6f91f8ddb15" />
+
 
 ## ⚡ Features
 
