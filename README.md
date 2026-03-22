@@ -9,13 +9,11 @@ Escribí `/firma` y se reemplaza solo. Seleccioná texto y buscalo en Maps al in
 ---
 
 ## 📥 Descargar
-
 | Plataforma | Archivo |
 |---|---|
-| **Windows 10/11** | [Descargar .exe](../../releases/latest) |
-| **macOS Apple Silicon (M1/M2/M3/M4)** | [Descargar .dmg arm64](../../releases/latest) |
-| **macOS Intel** | [Descargar .dmg](../../releases/latest) |
-
+| **Windows 10/11** | [NewenKey-Windows.exe](../../releases/latest) |
+| **macOS Apple Silicon (M1/M2/M3/M4)** | [NewenKey-Mac-AppleSilicon.dmg](../../releases/latest) |
+| **macOS Intel** | [NewenKey-Mac-Intel.dmg](../../releases/latest) |
 ---
 
 ## ⚡ Features
