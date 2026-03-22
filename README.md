@@ -7,7 +7,7 @@ Escribí `/firma` y se reemplaza solo. Seleccioná texto y buscalo en Maps al in
 > *"Newen" significa fuerza, energía y poder en mapudungun, la lengua del pueblo mapuche.*
 
 ---
-<img width="1093" height="797" alt="newen" src="https://github.com/user-attachments/assets/97202b64-4593-43c8-89cf-bdb65e7abf2e" />
+<img width="875" height="638" alt="newenkey" src="https://github.com/user-attachments/assets/afa2316e-98e3-4030-b1f9-6c0b14fe69c6" />
 
 ## 📥 Descargar
 | Plataforma | Archivo |
