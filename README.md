@@ -16,6 +16,8 @@ Escribí `/firma` y se reemplaza solo. Seleccioná texto y buscalo en Maps al in
 | **macOS Apple Silicon (M1/M2/M3/M4)** | [NewenKey-Mac-AppleSilicon.dmg](../../releases/latest) |
 | **macOS Intel** | [NewenKey-Mac-Intel.dmg](../../releases/latest) |
 
+🔍 ¿Querés ver el código antes de instalar? → github.com/GonzaloBullian/newenkey
+
 ## ⚡ Features
 
 - **Textos rápidos** — Escribís /firma, /ok, /follow y se reemplaza automáticamente
