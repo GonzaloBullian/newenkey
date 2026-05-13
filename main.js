@@ -63,9 +63,48 @@ const KEYCODE_MAP = {
 const SHIFT_MAP_ES = { 2:'!',3:'"',5:'%',6:'&',8:'/',9:'(',10:')',11:'=',12:'?',51:';',52:':' };
 const ALTGR_MAP_ES = { 3:'@',4:'#',26:'[',27:']',43:'\\',12:'\\' };
 
+let macKeyListenerProcess = null;
+
 function initTextExpansion() {
   if (IS_MAC) {
-    console.log('[NK] Text expansion: skipped on macOS (using hotkeys only)');
+    // Use native CGEventTap binary for macOS key listening
+    try {
+      const { spawn } = require('child_process');
+      const listenerPath = path.join(__dirname, 'assets', 'keylistener');
+      macKeyListenerProcess = spawn(listenerPath, [], { stdio: ['ignore', 'pipe', 'pipe'] });
+      let buffer = '';
+      macKeyListenerProcess.stdout.on('data', (data) => {
+        if (!expansionEnabled) return;
+        buffer += data.toString();
+        const lines = buffer.split('\n');
+        buffer = lines.pop();
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const evt = JSON.parse(line);
+            const keyCode = evt.k;
+            const ch = evt.c;
+            // Enter(36), Tab(48), Escape(53) → reset buffer
+            if (keyCode === 36 || keyCode === 48 || keyCode === 53) { keyBuffer = ''; continue; }
+            // Backspace(51)
+            if (keyCode === 51) { keyBuffer = keyBuffer.slice(0, -1); continue; }
+            // Space(49) → check expansion
+            if (keyCode === 49) { checkAndExpand(keyBuffer); keyBuffer = ''; continue; }
+            if (!ch) continue;
+            keyBuffer += ch.toLowerCase();
+            if (keyBuffer.length > 50) keyBuffer = keyBuffer.slice(-50);
+            const lower = keyBuffer.toLowerCase();
+            for (const trigger of Object.keys(expansionTriggers)) {
+              if (lower.endsWith(trigger)) { expandTrigger(trigger, expansionTriggers[trigger]); keyBuffer = ''; break; }
+            }
+          } catch(e) {}
+        }
+      });
+      macKeyListenerProcess.stderr.on('data', (data) => console.log('[NK] keylistener:', data.toString().trim()));
+      macKeyListenerProcess.on('error', (err) => console.error('[NK] keylistener error:', err.message));
+      macKeyListenerProcess.on('exit', (code) => console.log('[NK] keylistener exited:', code));
+      console.log('[NK] Text expansion started (macOS via CGEventTap)');
+    } catch(e) { console.error('[NK] macOS key listener failed:', e.message); }
     return;
   }
   try {
@@ -175,6 +214,7 @@ ipcMain.handle('settings:setAutoStart', (_, enabled) => { setAutoStart(enabled);
 ipcMain.handle('window:minimize', () => mainWindow.minimize());
 ipcMain.handle('window:maximize', () => { mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize(); });
 ipcMain.handle('window:close', () => mainWindow.hide());
+ipcMain.handle('shell:openExternal', (_, url) => shell.openExternal(url));
 ipcMain.handle('export:ahk', async (_, script) => {
   const r = await dialog.showSaveDialog(mainWindow, { defaultPath: 'newenkey.ahk', filters: [{ name: 'AHK', extensions: ['ahk'] }] });
   if (!r.canceled && r.filePath) { fs.writeFileSync(r.filePath, script); return true; } return false;
@@ -198,6 +238,8 @@ if (!lock) app.quit();
 else {
   app.on('second-instance', () => { if(mainWindow) { if(mainWindow.isMinimized()) mainWindow.restore(); mainWindow.show(); mainWindow.focus(); } });
   app.whenReady().then(() => {
+    // Set dock/taskbar icon to NewenKey icon (instead of default Electron icon)
+    if (IS_MAC) app.dock.setIcon(path.join(__dirname, 'assets', 'icon.png'));
     createWindow(); createTray();
     const sc = loadShortcuts();
     if (sc.length > 0) { registerAllShortcuts(sc); rebuildExpansionTriggers(); }
@@ -207,4 +249,4 @@ else {
 }
 app.on('window-all-closed', () => { if(!IS_MAC) app.quit(); });
 app.on('before-quit', () => { app.isQuiting = true; });
-app.on('will-quit', () => { globalShortcut.unregisterAll(); if(uioHook) uioHook.stop(); });
+app.on('will-quit', () => { globalShortcut.unregisterAll(); if(uioHook) uioHook.stop(); if(macKeyListenerProcess) macKeyListenerProcess.kill(); });

@@ -12,4 +12,5 @@ contextBridge.exposeInMainWorld('newenkey', {
   exportJSON: (s) => ipcRenderer.invoke('export:json', s),
   importJSON: () => ipcRenderer.invoke('import:json'),
   onExpansionFired: (cb) => ipcRenderer.on('expansion:fired', (_, d) => cb(d)),
+  openExternal: (url) => ipcRenderer.invoke('shell:openExternal', url),
 });

@@ -64,8 +64,6 @@ const TEMPLATE_PACKS = [
       { name: "Email", trigger: "/email", text: "tu@email.com", desc: "Tu email rápido" },
       { name: "Teléfono", trigger: "/tel", text: "+54 11 1234-5678", desc: "Tu número" },
       { name: "Dirección", trigger: "/dir", text: "Av. Corrientes 1234, CABA, Argentina", desc: "Tu dirección" },
-      { name: "CUIT", trigger: "/cuit", text: "20-12345678-9", desc: "Tu CUIT/CUIL" },
-      { name: "CBU", trigger: "/cbu", text: "0000000000000000000000", desc: "Tu CBU" },
     ]
   },
   {
@@ -83,9 +81,8 @@ const DEFAULT_SHORTCUTS = [
   { id: 1, name: "✍️ Firma de email", keys: [], type: "expansion", searchEngine: "", description: "Escribí /firma → pega tu firma profesional", enabled: false, snippetText: "—\n[Tu Nombre]\n[Cargo] | [Empresa]\n📱 +54 11 XXXX-XXXX\n📧 email@empresa.com\n🔗 linkedin.com/in/tu-perfil", openTarget: "", customUrl: "", commandText: "", trigger: "/firma" },
   { id: 2, name: "👋 Presentación", keys: [], type: "expansion", searchEngine: "", description: "Escribí /hola → presentación profesional", enabled: false, snippetText: "¡Hola! Soy [Tu Nombre], [cargo] en [Empresa].\nMe dedico a [qué hacés] y me encantaría conectar.\n¿Tenés unos minutos esta semana para charlar?", openTarget: "", customUrl: "", commandText: "", trigger: "/hola" },
   { id: 3, name: "✅ Recibido", keys: [], type: "expansion", searchEngine: "", description: "Escribí /ok → acuse de recibo rápido", enabled: false, snippetText: "Recibido, lo estoy revisando. Te confirmo en breve.", openTarget: "", customUrl: "", commandText: "", trigger: "/ok" },
-  { id: 4, name: "🔄 Follow up", keys: [], type: "expansion", searchEngine: "", description: "Escribí /follow → seguimiento amable", enabled: false, snippetText: "¡Hola! Paso a hacer un follow up del mensaje anterior.\n¿Pudiste verlo? Cualquier cosa, acá estoy. ¡Gracias!", openTarget: "", customUrl: "", commandText: "", trigger: "/follow" },
-  { id: 5, name: "🙏 Gracias reunión", keys: [], type: "expansion", searchEngine: "", description: "Escribí /thx → agradecimiento post-reunión", enabled: false, snippetText: "¡Gracias por la reunión! Muy productiva.\nQuedo pendiente de los próximos pasos y te actualizo a la brevedad.\n¡Abrazo!", openTarget: "", customUrl: "", commandText: "", trigger: "/thx" },
-  { id: 6, name: "💰 Datos bancarios", keys: [], type: "expansion", searchEngine: "", description: "Escribí /cbu → datos para transferencia", enabled: false, snippetText: "Datos para la transferencia:\n🏦 Banco: [Tu Banco]\nCBU: [XXXXXXXXXXXXXXXXXXXX]\nAlias: [tu.alias]\nCUIL: [XX-XXXXXXXX-X]\nTitular: [Tu Nombre]", openTarget: "", customUrl: "", commandText: "", trigger: "/cbu" },
+  { id: 4, name: "🤝 Primer contacto", keys: [], type: "expansion", searchEngine: "", description: "Escribí /intro → presentación para cold outreach", enabled: false, snippetText: "Hola [nombre], soy [tu nombre] de [empresa]. Vi tu perfil y creo que podríamos generar una buena sinergia. ¿Tenés 15 minutos esta semana para una charla rápida?", openTarget: "", customUrl: "", commandText: "", trigger: "/intro" },
+  { id: 5, name: "🤖 Prompt IA", keys: [], type: "expansion", searchEngine: "", description: "Estructura para promptear con IA", enabled: false, snippetText: "#PROMPT\n\nCONTEXTO:\n[Quién sos, qué proyecto, en qué momento estás]\n\nARCHIVO ADJUNTO:\n[Qué es el .md que te paso — ej: \"Es mi plan editorial de mayo\", \"Son las notas de una reunión con cliente X\", \"Es el brief de un proyecto\"]\n\nOBJETIVO:\n[Qué quiero que hagas con ese archivo]\n\nINSTRUCCIONES:\n[Cómo querés que lo procese — analizar, resumir, transformar, criticar, completar, traducir, etc.]\n\nESTRUCTURA DE SALIDA:\n[Cómo querés organizada la respuesta — secciones, bullets, tabla, pasos numerados]\n\nFORMATO:\n[Tono, longitud, idioma, estilo]\n\nRESTRICCIONES:\n[Qué NO querés — opcional pero útil]", openTarget: "", customUrl: "", commandText: "", trigger: "/prompt" },
   { id: 7, name: "📱 Mis redes", keys: [], type: "expansion", searchEngine: "", description: "Escribí /redes → links a tus redes sociales", enabled: false, snippetText: "🔗 Mis redes:\n📸 Instagram: @[tu_usuario]\n💼 LinkedIn: linkedin.com/in/[tu-perfil]\n🐦 Twitter/X: @[tu_usuario]\n🌐 Web: [www.tuweb.com]", openTarget: "", customUrl: "", commandText: "", trigger: "/redes" },
   { id: 8, name: "📧 Email", keys: [], type: "expansion", searchEngine: "", description: "Escribí /email → tu dirección de email", enabled: false, snippetText: "tu@email.com", openTarget: "", customUrl: "", commandText: "", trigger: "/email" },
   { id: 9, name: "📞 Teléfono", keys: [], type: "expansion", searchEngine: "", description: "Escribí /tel → tu número", enabled: false, snippetText: "+54 11 XXXX-XXXX", openTarget: "", customUrl: "", commandText: "", trigger: "/tel" },
@@ -96,7 +93,6 @@ const DEFAULT_SHORTCUTS = [
   { id: 12, name: "📍 Buscar en Maps", keys: ["Ctrl", "Shift", "M"], type: "search", searchEngine: "maps", description: "Seleccioná texto → busca en Maps", enabled: false, snippetText: "", openTarget: "", customUrl: "", commandText: "", trigger: "" },
   { id: 13, name: "▶️ Buscar en YouTube", keys: ["Ctrl", "Shift", "Y"], type: "search", searchEngine: "youtube", description: "Seleccioná texto → busca en YouTube", enabled: false, snippetText: "", openTarget: "", customUrl: "", commandText: "", trigger: "" },
   { id: 14, name: "💼 Buscar en LinkedIn", keys: ["Ctrl", "Shift", "L"], type: "search", searchEngine: "linkedin", description: "Seleccioná texto → busca en LinkedIn", enabled: false, snippetText: "", openTarget: "", customUrl: "", commandText: "", trigger: "" },
-  { id: 15, name: "🚀 Abrir WhatsApp", keys: ["Ctrl", "Alt", "W"], type: "open", searchEngine: "", description: "Abre WhatsApp Web", enabled: false, snippetText: "", openTarget: "https://web.whatsapp.com", customUrl: "", commandText: "", trigger: "" },
   { id: 16, name: "📅 Abrir Calendar", keys: ["Ctrl", "Alt", "C"], type: "open", searchEngine: "", description: "Abre Google Calendar", enabled: false, snippetText: "", openTarget: "https://calendar.google.com", customUrl: "", commandText: "", trigger: "" },
 ];
 
@@ -237,7 +233,7 @@ export default function App() {
         <div className="h-[1px] w-full" style={{background:"linear-gradient(90deg,transparent,#1e3a5f,#2563eb40,#1e3a5f,transparent)"}}/>
         <div className="max-w-6xl mx-auto px-6 py-4" style={{WebkitAppRegion:isMac&&IS_ELECTRON?"drag":"no-drag"}}>
           <div className="flex items-center justify-between" style={isMac&&IS_ELECTRON?{paddingLeft:68}:{}}>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3" style={{WebkitAppRegion:"no-drag"}}>
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold" style={{background:"linear-gradient(135deg,#1e3a5f,#2563eb)",boxShadow:"0 4px 15px rgba(37,99,235,0.2)"}}>⚡</div>
               <div>
                 <h1 className="text-lg font-bold tracking-tight" style={{fontFamily:"'JetBrains Mono',monospace",background:"linear-gradient(90deg,#93c5fd,#e2e8f0)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>NewenKey</h1>
@@ -420,11 +416,31 @@ export default function App() {
                   style={{background:autoStart?"#e2e8f0":"#475569",left:autoStart?"22px":"2px"}}/>
               </button>
             </div>
+            {isMac && <div className="p-4 rounded-xl" style={{background:"rgba(253,186,116,0.05)",border:"1px solid rgba(253,186,116,0.2)"}}>
+              <div className="text-sm font-semibold mb-1" style={{color:"#fbbf24"}}>🔐 Permisos necesarios (macOS)</div>
+              <p className="text-xs mt-1" style={{color:"#94a3b8"}}>Para que los atajos de teclado y la expansión de texto funcionen, necesitás habilitar estos permisos:</p>
+              <div className="mt-2 space-y-1.5">
+                <div className="flex items-start gap-2">
+                  <span className="text-xs mt-0.5">1.</span>
+                  <p className="text-xs" style={{color:"#d1d5db"}}><strong>Accesibilidad</strong> — Permite que NewenKey pegue texto y ejecute atajos.</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-xs mt-0.5">2.</span>
+                  <p className="text-xs" style={{color:"#d1d5db"}}><strong>Monitoreo de entrada</strong> — Permite detectar lo que escribís para expandir triggers.</p>
+                </div>
+              </div>
+              <button onClick={()=>{if(IS_ELECTRON) window.newenkey.openExternal("x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")}}
+                className="mt-3 w-full h-9 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all hover:opacity-80 cursor-pointer"
+                style={{background:"rgba(251,191,36,0.1)",border:"1px solid rgba(251,191,36,0.25)",color:"#fbbf24"}}>
+                🔓 Abrir Privacidad y Seguridad
+              </button>
+              <p className="text-xs mt-2" style={{color:"#64748b"}}>Preferencias del Sistema → Privacidad y Seguridad → Accesibilidad / Monitoreo de entrada → Agregá NewenKey.</p>
+            </div>}
             <div className="p-4 rounded-xl" style={{background:"rgba(15,23,42,0.6)",border:"1px solid #1e293b"}}>
               <div className="text-sm font-semibold mb-1" style={{color:"#e2e8f0"}}>Acerca de</div>
               <p className="text-xs" style={{color:"#64748b"}}>NewenKey v1.0 · by gbull</p>
               <p className="text-xs mt-1" style={{color:"#475569"}}>"Newen" significa fuerza, energía y poder en mapudungun. Cada atajo que creás canaliza tu newen digital.</p>
-              <a href="https://www.instagram.com/gonzabull.ai/" target="_blank" rel="noopener" className="mt-3 w-full h-9 rounded-lg text-xs font-medium flex items-center justify-center gap-2 transition-all hover:opacity-80" style={{background:"linear-gradient(135deg,rgba(131,58,180,0.15),rgba(253,29,29,0.1))",border:"1px solid rgba(131,58,180,0.2)",color:"#c084fc",textDecoration:"none"}}>📸 @gonzabull.ai</a>
+              <a href="https://www.instagram.com/gonzalobullian/" target="_blank" rel="noopener" className="mt-3 w-full h-9 rounded-lg text-xs font-medium flex items-center justify-center gap-2 transition-all hover:opacity-80" style={{background:"linear-gradient(135deg,rgba(131,58,180,0.15),rgba(253,29,29,0.1))",border:"1px solid rgba(131,58,180,0.2)",color:"#c084fc",textDecoration:"none"}}>📸 @gonzalobullian</a>
             </div>
           </div>
         </div>
